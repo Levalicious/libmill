@@ -14,8 +14,7 @@ jobs:
     steps:
     - uses: egor-tensin/setup-gcc@v1
       with:
-        # GCC version to install
-        version: 6
+        version: 7
     - uses: actions/checkout@v3
     - name: autogen
       run: ./autogen.sh
