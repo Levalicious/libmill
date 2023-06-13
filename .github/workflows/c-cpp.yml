@@ -29,8 +29,8 @@ jobs:
         method: sha256
         patterns: libmill-*.tar.gz
     - name: Publish
-      uses: skx/github-action-publish-binaries@release-2.0
+      uses: actions/upload-artifact@v3.1.2
       with:
-        # The pattern of files to upload
-        args: libmill-*.tar.gz
+        path: libmill-*.tar.gz
+        if-no-files-found: error
       
