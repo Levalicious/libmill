@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-
+  
     runs-on: ubuntu-20.04
 
     steps:
@@ -22,4 +22,13 @@ jobs:
       run: ./configure
     - name: make
       run: make distcheck
+    - name: checksum
+      uses: Huy-Ngo/gha-sha@v1.1.0
+      with:
+        glob: libmill-*.tar.gz
+    - name: publish
+      uses: actions/upload-artifact@v3.1.2
+      with:
+        path: libmill-*.tar.gz
+        if-no-files-found: error
       
