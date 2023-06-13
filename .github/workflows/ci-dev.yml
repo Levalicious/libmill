@@ -2,9 +2,9 @@ name: Main CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "dev" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "dev" ]
 
 jobs:
   build:
@@ -22,15 +22,7 @@ jobs:
     - name: Configure
       run: ./configure
     - name: Make
-      run: make distcheck
-    - name: Generate checksum
-      uses: jmgilman/actions-generate-checksum@v1.0.0
-      with:
-        method: sha256
-        patterns: libmill-*.tar.gz
-    - name: Publish
-      uses: actions/upload-artifact@v3.1.2
-      with:
-        path: libmill-*.tar.gz
-        if-no-files-found: error
+      run: make
+    - name: Test
+      run: make check
       
