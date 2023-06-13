@@ -12,23 +12,25 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-    - uses: egor-tensin/setup-gcc@v1
+    - name: Install GCC
+    - uses: egor-tensin/setup-gcc@v1.3
       with:
         version: 7
     - uses: actions/checkout@v3
-    - name: autogen
+    - name: Run autogen.sh
       run: ./autogen.sh
-    - name: configure
+    - name: Configure
       run: ./configure
-    - name: make
+    - name: Make
       run: make distcheck
-    - name: checksum
-      uses: Huy-Ngo/gha-sha@v1.1.0
+    - name: Generate checksum
+      uses: jmgilman/actions-generate-checksum@v1.0.0
       with:
-        glob: libmill-*.tar.gz
-    - name: publish
-      uses: actions/upload-artifact@v3.1.2
+        method: sha256
+        patterns: libmill-*.tar.gz
+    - name: Publish
+      uses: skx/github-action-publish-binaries@release-2.0
       with:
-        path: libmill-*.tar.gz
-        if-no-files-found: error
+        # The pattern of files to upload
+        args: libmill-*.tar.gz
       
