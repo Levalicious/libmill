@@ -2,9 +2,11 @@ name: Dev CI
 
 on:
   push:
-    branches: [ "develop" ]
+    branches-ignore:
+      - main
   pull_request:
-    branches: [ "develop" ]
+    branches-ignore:
+      - main
 
 jobs:
   build:
